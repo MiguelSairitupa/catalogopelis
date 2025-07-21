@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for Netflix-like Swiper carousel */
+.netflix-carousel .swiper-button-prev,
+.netflix-carousel .swiper-button-next {
+  color: #e50914;
+  background: rgba(0,0,0,0.5);
+  width: 40px;
+  height: 100%;
+  top: 0;
+  margin-top: 0;
+  padding: 0 10px;
+}
+
+.netflix-carousel .swiper-button-prev {
+  left: 0;
+}
+
+.netflix-carousel .swiper-button-next {
+  right: 0;
+}
+
+.netflix-carousel .swiper-pagination-bullet {
+  background: #aaa;
+  opacity: 0.7;
+}
+
+.netflix-carousel .swiper-pagination-bullet-active {
+  background: #e50914;
+  opacity: 1;
+}
