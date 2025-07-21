@@ -87,30 +87,30 @@ const MovieCard = ({ movie, showAddToList = true }) => {
   return (
     <div className="group relative bg-gray-900 rounded-lg overflow-hidden shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer">
       {/* Imagen del póster con efecto hover */}
-      <div className="relative" onClick={handleMovieClick}>
+      <div className="relative aspect-[2/3]" onClick={handleMovieClick}>
         <LazyLoadImage 
           src={movie.poster_path} 
           alt={movie.title} 
           effect="blur"
-          className="w-full h-64 object-cover"
+          className="w-full h-full object-cover"
         />
         {/* Overlay con botón de play */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
-          <PlayIcon className="h-12 w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <PlayIcon className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
         {/* Degradado inferior para el título */}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black to-transparent"></div>
+        <div className="absolute inset-x-0 bottom-0 h-12 sm:h-16 bg-gradient-to-t from-black to-transparent"></div>
       </div>
 
       {/* Información de la película */}
-      <div className="p-4">
-        <h3 className="text-white font-bold truncate mb-1">{movie.title}</h3>
+      <div className="p-2 sm:p-3 md:p-4">
+        <h3 className="text-white font-bold text-sm sm:text-base truncate mb-1">{movie.title}</h3>
         
         {/* Géneros */}
         {movie.genres && movie.genres.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-2">
-            {movie.genres.slice(0, 2).map((genre) => (
-              <span key={genre.id} className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+            {movie.genres.slice(0, window.innerWidth < 640 ? 1 : 2).map((genre) => (
+              <span key={genre.id} className="text-xs bg-gray-700 text-gray-300 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded">
                 {genre.name}
               </span>
             ))}
@@ -118,16 +118,16 @@ const MovieCard = ({ movie, showAddToList = true }) => {
         )}
         
         <div className="flex justify-between items-center mt-2">
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2 flex-1 min-w-0">
             {/* Rating */}
             {movie.rating && (
-              <span className="text-yellow-400 text-sm font-medium">
+              <span className="text-yellow-400 text-xs sm:text-sm font-medium">
                 ★ {movie.rating}
               </span>
             )}
             {/* Año */}
             {movie.release_date && (
-              <span className="text-gray-400 text-sm">
+              <span className="text-gray-400 text-xs sm:text-sm truncate">
                 {new Date(movie.release_date).getFullYear()}
               </span>
             )}
@@ -141,15 +141,15 @@ const MovieCard = ({ movie, showAddToList = true }) => {
                 toggleList();
               }}
               disabled={isLoading}
-              className="text-gray-400 hover:text-red-500 transition-colors disabled:opacity-50"
+              className="text-gray-400 hover:text-red-500 transition-colors disabled:opacity-50 flex-shrink-0 ml-2"
               title={isInList ? 'Remover de Mi Lista' : 'Agregar a Mi Lista'}
             >
               {isLoading ? (
-                <div className="animate-spin h-6 w-6 border-2 border-white border-t-transparent rounded-full"></div>
+                <div className="animate-spin h-5 w-5 sm:h-6 sm:w-6 border-2 border-white border-t-transparent rounded-full"></div>
               ) : isInList ? (
-                <HeartSolid className="h-6 w-6 text-red-500" /> 
+                <HeartSolid className="h-5 w-5 sm:h-6 sm:w-6 text-red-500" /> 
               ) : (
-                <HeartOutline className="h-6 w-6 text-white" />
+                <HeartOutline className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               )}
             </button>
           )}
@@ -157,7 +157,7 @@ const MovieCard = ({ movie, showAddToList = true }) => {
       </div>
 
       {/* Efecto de borde al hacer hover */}
-      <div className="absolute inset-0 border-4 border-transparent group-hover:border-red-500 rounded-lg transition-all duration-300 pointer-events-none"></div>
+      <div className="absolute inset-0 border-2 sm:border-4 border-transparent group-hover:border-red-500 rounded-lg transition-all duration-300 pointer-events-none"></div>
     </div>
   );
 };

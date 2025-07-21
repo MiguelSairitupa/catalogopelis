@@ -70,46 +70,47 @@ const MovieSearch = ({ movies, onFilteredMovies, genres }) => {
   };
 
   return (
-    <div className="mb-8">
+    <div className="mb-6 sm:mb-8">
       {/* Search Bar */}
-      <div className="relative mb-4">
+      <div className="relative mb-3 sm:mb-4">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-          <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+          <MagnifyingGlassIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
         </div>
         <input
           type="text"
           placeholder="Buscar películas..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="block w-full pl-10 pr-3 py-3 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+          className="block w-full pl-9 sm:pl-10 pr-3 py-2 sm:py-3 border border-gray-600 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 text-sm sm:text-base"
         />
       </div>
 
       {/* Filter Toggle */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 sm:mb-4 space-y-2 sm:space-y-0">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="inline-flex items-center px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors"
+          className="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-600 transition-colors text-sm sm:text-base"
         >
-          <FunnelIcon className="h-5 w-5 mr-2" />
+          <FunnelIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
           Filtros
         </button>
         
         {(searchTerm || selectedGenre || sortBy !== 'title' || sortOrder !== 'asc') && (
           <button
             onClick={clearFilters}
-            className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+            className="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm sm:text-base"
           >
-            <XMarkIcon className="h-5 w-5 mr-2" />
-            Limpiar Filtros
+            <XMarkIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+            <span className="hidden sm:inline">Limpiar Filtros</span>
+            <span className="sm:hidden">Limpiar</span>
           </button>
         )}
       </div>
 
       {/* Filters Panel */}
       {showFilters && (
-        <div className="bg-gray-800 rounded-lg p-6 mb-6 border border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-gray-800 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 border border-gray-700">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {/* Genre Filter */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
@@ -118,7 +119,7 @@ const MovieSearch = ({ movies, onFilteredMovies, genres }) => {
               <select
                 value={selectedGenre}
                 onChange={(e) => setSelectedGenre(e.target.value)}
-                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
               >
                 <option value="">Todos los géneros</option>
                 {genres && genres.map((genre) => (
@@ -137,7 +138,7 @@ const MovieSearch = ({ movies, onFilteredMovies, genres }) => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
               >
                 <option value="title">Título</option>
                 <option value="release_date">Fecha de estreno</option>
@@ -146,14 +147,14 @@ const MovieSearch = ({ movies, onFilteredMovies, genres }) => {
             </div>
 
             {/* Sort Order */}
-            <div>
+            <div className="sm:col-span-2 lg:col-span-1">
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Orden
               </label>
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                className="w-full bg-gray-700 border border-gray-600 text-white rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm sm:text-base"
               >
                 <option value="asc">Ascendente</option>
                 <option value="desc">Descendente</option>

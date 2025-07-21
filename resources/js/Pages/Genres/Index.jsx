@@ -34,33 +34,33 @@ export default function Index({ genres }) {
                 {/* Content */}
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     {genres && genres.length > 0 ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
                             {genres.map((genre) => (
                                 <div key={genre.id} className="bg-gray-800 rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 hover:scale-105 border border-gray-700">
-                                    <div className="p-6">
-                                        <div className="flex items-center justify-between mb-4">
-                                            <h3 className="text-xl font-bold text-white">
+                                    <div className="p-4 sm:p-6">
+                                        <div className="flex items-start justify-between mb-3 sm:mb-4">
+                                            <h3 className="text-lg sm:text-xl font-bold text-white flex-1 pr-2">
                                                 {genre.name}
                                             </h3>
-                                            <span className="bg-red-600 text-white text-xs px-2 py-1 rounded-full">
+                                            <span className="bg-red-600 text-white text-xs px-2 py-1 rounded-full whitespace-nowrap">
                                                 {genre.movies_count || 0} películas
                                             </span>
                                         </div>
                                         
                                         {genre.description && (
-                                            <p className="text-gray-300 text-sm mb-4 line-clamp-3">
+                                            <p className="text-gray-300 text-sm mb-3 sm:mb-4 line-clamp-2 sm:line-clamp-3">
                                                 {genre.description}
                                             </p>
                                         )}
                                         
-                                        <div className="flex justify-between items-center">
+                                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
                                             <Link
                                                 href={route('genres.show', genre.id)}
-                                                className="text-green-400 hover:text-green-300 text-sm font-medium transition-colors"
+                                                className="text-green-400 hover:text-green-300 text-sm font-medium transition-colors text-center sm:text-left"
                                             >
                                                 Ver Películas
                                             </Link>
-                                            <div className="flex space-x-2">
+                                            <div className="flex justify-center sm:justify-end space-x-2">
                                                 <Link
                                                     href={route('genres.edit', genre.id)}
                                                     className="text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
