@@ -18,11 +18,14 @@ RUN composer install --optimize-autoloader --no-dev
 # Instalar Node y compilar React (Inertia)
 RUN npm install && npm run build
 
+# Configurar Apache para que use /var/www/html/public como raíz
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
+    && sed -i 's|/var/www/|/var/www/html/public|g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 # Establecer permisos de storage y cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Exponer puerto 80
 EXPOSE 80
 
-# Iniciar Apache
 CMD ["apache2-foreground"]
