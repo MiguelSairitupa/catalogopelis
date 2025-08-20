@@ -4,7 +4,7 @@ FROM php:8.2-apache
 # Instalar extensiones y dependencias necesarias
 RUN apt-get update && apt-get install -y \
     libpq-dev zip unzip git curl libzip-dev npm \
-    && docker-php-ext-install pdo pdo_pgsql
+    && docker-php-ext-install pdo pdo_pgsql pdo_mysql
 
 # Configurar Apache para que use /public como raíz
 RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf \
